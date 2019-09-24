@@ -8,13 +8,14 @@ import json
 
 
 class InstaScrape:
-    def __init__(self, path):
+    def __init__(self, path=None):
         self.ctx = ssl.create_default_context()
         self.ctx.check_hostname = False
         self.ctx.verify_mode = ssl.CERT_NONE
         self.path = path
         
     def getinfo(self, url, to_txt=False):
+        assert url, "url invalid!"
         html = urllib.request.urlopen(url, context=self.ctx).read()
         soup = BeautifulSoup(html, 'html.parser')
         
